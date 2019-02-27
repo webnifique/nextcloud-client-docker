@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER Martin Peters
+LABEL maintainer="juanignacioborda@gmail.com"
 
 ARG USER=ncsync
 ARG USER_UID=1000
