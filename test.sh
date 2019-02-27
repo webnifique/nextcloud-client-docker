@@ -63,5 +63,6 @@ docker run -it --rm \
  -v $(pwd)/sync-folder:/media/nextcloud \
  -e NC_USER=$username -e NC_PASS=$password \
  -e NC_URL=$nextcloudserver\
+ -e NC_INTERVAL=20\
  juanitomint/nextcloud-client
  
