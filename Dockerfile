@@ -10,6 +10,7 @@ ENV USER=$USER \
     USER_GID=$USER_GID \
     NC_USER=username \
     NC_PASS=password \
+    NC_INTERVAL=500 \
     NC_URL="" \
     NC_TRUST_CERT=false \
     NC_SOURCE_DIR="/media/nextcloud/" \
