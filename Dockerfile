@@ -1,6 +1,8 @@
 FROM alpine:latest
 LABEL maintainer="juanignacioborda@gmail.com"
-
+ARG VCS_REF
+ARG BUILD_DATE
+ARG buildno
 ARG USER=ncsync
 ARG USER_UID=1000
 ARG USER_GID=1000
