@@ -23,6 +23,15 @@ This image is based on the work made by: [Martin Peters](https://github.com/Frea
       -e NC_URL=$server_url\
       juanitomint/nextcloud-client
 
+## Example one time run
+
+    docker run -it --rm \
+      -v some_named_volume:/media/nextcloud \
+      -e NC_USER=$username -e NC_PASS=$password \
+      -e NC_URL=$server_url\
+      -e NC_EXIT=true\
+      juanitomint/nextcloud-client
+
 
 replace:
  * $username
@@ -51,7 +60,11 @@ default: false
 Sets the interval between syncs in seconds
 default: 300 (300 /60 = 5 Minutes)
 
-
+##### NC_EXIT
+If "true" the sync will happen once and then the container will exit, very usefull for using 
+in conjunction with cron or schedulers
+default: false
+example: 
 ## Advanced settings
 
 ##### USER
