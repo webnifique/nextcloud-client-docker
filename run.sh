@@ -9,7 +9,7 @@ chown -R $USER:$USER $NC_SOURCE_DIR
 
 while true
 do
-	/bin/su -s /bin/ash $USER -c 'nextcloudcmd $( [ $NC_SILENT == true ] && echo "--silent" ) $( [ $NC_TRUST_CERT == true ] && echo "--trust" ) --non-interactive -u $NC_USER -p $NC_PASS $NC_SOURCE_DIR $NC_URL'
+	/bin/su -s /bin/ash $USER -c 'nextcloudcmd $( [ "$NC_SILENT" == true ] && echo "--silent" ) $( [ "$NC_TRUST_CERT" == true ] && echo "--trust" ) --non-interactive -u $NC_USER -p $NC_PASS $NC_SOURCE_DIR $NC_URL'
 		if [ "$NC_EXIT" = true ] ; then
 			
 			if [  ! "$NC_SILENT" == true ] ; then 
