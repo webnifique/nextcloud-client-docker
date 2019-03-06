@@ -3,7 +3,7 @@
 # ensure, that the sync dir exists and is owned by the user
 [ -d $NC_SYNC_DIR ] || mkdir -p $NC_SYNC_DIR
 	if [  ! "$NC_SILENT" = true ] ; then 
-		echo "chown $USER:$USER $NC_SOURCE_DIR";
+		echo "chown $USER_UID:$USER_GID $NC_SOURCE_DIR";
 	fi
 chown -R $USER:$USER $NC_SOURCE_DIR
 
