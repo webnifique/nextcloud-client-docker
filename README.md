@@ -87,6 +87,11 @@ whether or not trust self signed certificates or invalid certificates
 
 default: false
 
+##### NC_HIDDEN
+whether or not nextcloud should be forced to sync hidden files
+
+default: false
+
 
 Any comment or propblem feel free to [fill an issue](https://github.com/juanitomint/nextcloud-client-docker/issues/new) or make a PR!
 
