@@ -15,6 +15,15 @@ This image is based on the work made by: [Martin Peters](https://github.com/Frea
       -e NC_URL=$server_url\
       juanitomint/nextcloud-client
 
+## Example using local folder and exclude a subfolder
+
+    docker run -it --rm \
+      -v $(pwd)/sync-folder:/media/nextcloud \
+      -e NC_EXCLUDE=foldername \
+      -e NC_USER=$username -e NC_PASS=$password \
+      -e NC_URL=$server_url\
+      juanitomint/nextcloud-client
+
 ## Example using a [named volume](https://docs.docker.com/storage/volumes/)
 
     docker run -it --rm \

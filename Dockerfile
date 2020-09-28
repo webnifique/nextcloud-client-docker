@@ -18,7 +18,8 @@ ENV USER=$USER \
     NC_SOURCE_DIR="/media/nextcloud/" \
     NC_SILENT=false \
     NC_EXIT=false   \
-    NC_HIDDEN=false
+    NC_HIDDEN=false \
+    NC_EXCLUDE=""
 
 
 # create group and user
