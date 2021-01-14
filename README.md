@@ -92,7 +92,7 @@ The system user inside the container you want to use for runing the sync
 
 default: ncsync
 
-##### USER_GUID
+##### USER_GID
 The system user group id inside the container you want to use for runing the sync
 
 default: 1000
