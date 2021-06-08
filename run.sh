@@ -2,6 +2,15 @@
 
 LOG_DATE_FORMAT="%m-%d %H:%M:%S"
 
+[ -z $NC_USER ] && echo "[ error run.sh ]: Username NC_USER (required) is empty." | ts "${LOG_DATE_FORMAT}"
+[ -z $NC_PASS ] && echo "[ error run.sh ]: Password NC_PASS (required) is empty." | ts "${LOG_DATE_FORMAT}"
+[ -z $NC_URL ] && echo "[ error run.sh ]: Nextcloud URL NC_URL (required) is empty." | ts "${LOG_DATE_FORMAT}"
+
+if [ -z $NC_USER ] || [ -z $NC_PASS ] || [ -z $NC_URL ]; then
+  echo "[ error run.sh ]: Configuration is incomplete. Exit." | ts "${LOG_DATE_FORMAT}"
+  exit 1
+fi
+
 [ -d /settings ] || mkdir -p /settings
 chown -R $USER_UID:$USER_GID /settings
 
