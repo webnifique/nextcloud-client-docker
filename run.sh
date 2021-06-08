@@ -18,8 +18,13 @@ fi
 
 while true
 do
-	nextcloudcmd $( [ "$NC_HIDDEN" == true ] && echo "-h" ) $( [ "$NC_SILENT" == true ] && echo "--silent" ) $( [ "$NC_TRUST_CERT" == true ] && echo "--trust" ) $( [ "$EXCLUDE" ] && echo $EXCLUDE ) $( [ "$UNSYNCEDFOLDERS" ] && echo $UNSYNCEDFOLDERS ) --non-interactive -u $NC_USER -p $NC_PASS $NC_SOURCE_DIR $NC_URL
-	
+	nextcloudcmd $( [ "$NC_HIDDEN" == true ] && echo "-h" ) \
+		$( [ "$NC_SILENT" == true ] && echo "--silent" ) \
+		$( [ "$NC_TRUST_CERT" == true ] && echo "--trust" ) \
+		$( [ "$EXCLUDE" ] && echo $EXCLUDE ) \
+		$( [ "$UNSYNCEDFOLDERS" ] && echo $UNSYNCEDFOLDERS ) \
+		--non-interactive -u $NC_USER -p $NC_PASS $NC_SOURCE_DIR $NC_URL
+
 	#chown the files to the USER_UID:
 	echo "chown -R $USER_UID:$USER_GID $NC_SOURCE_DIR";
 	chown -R $USER_UID:$USER_GID $NC_SOURCE_DIR
