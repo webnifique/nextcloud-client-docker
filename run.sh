@@ -16,16 +16,18 @@ chown -R $USER_UID:$USER_GID /settings
 
 # check exclude file exists
 if [ -e "/settings/exclude" ]; then
-	EXCLUDE="--exclude /settings/exclude"
+	EXCLUDE="/settings/exclude"
 else
 	echo "[ info run.sh ]: exclude file not found!" | ts "${LOG_DATE_FORMAT}"
 fi
 # check unsyncedfolders file exists
 if [ -e "/settings/unsyncfolders" ]; then
-	UNSYNCEDFOLDERS="--unsyncedfolders /settings/unsyncfolders"
+	UNSYNCEDFOLDERS="/settings/unsyncfolders"
 else
 	echo "[ info run.sh ]: unsync file not found!" | ts "${LOG_DATE_FORMAT}"
 fi
+
+[ "$NC_PATH" ] && echo "[ info run.sh ]: Remote root folder overriden to $NC_PATH" | ts "${LOG_DATE_FORMAT}"
 
 [ "$NC_SILENT" == true ] && echo "[ info run.sh ]: Silent mode enabled" | ts "${LOG_DATE_FORMAT}"
 [ "$NC_HIDDEN" == true ] && echo "[ info run.sh ]: Sync hidden files enabled" | ts "${LOG_DATE_FORMAT}"
@@ -34,12 +36,16 @@ fi
 while true
 do
 	[ "$NC_SILENT" == true ] && echo "[ info run.sh ]: Start sync from $NC_URL to $NC_SOURCE_DIR" | ts "${LOG_DATE_FORMAT}"
-	nextcloudcmd $( [ "$NC_HIDDEN" ] && echo "-h" ) \
-		$( [ "$NC_SILENT" == true ] && echo "--silent" ) \
-		$( [ "$NC_TRUST_CERT" == true ] && echo "--trust" ) \
-		$( [ "$EXCLUDE" ] && echo $EXCLUDE ) \
-		$( [ "$UNSYNCEDFOLDERS" ] && echo $UNSYNCEDFOLDERS ) \
-		--non-interactive -u $NC_USER -p $NC_PASS $NC_SOURCE_DIR $NC_URL
+
+	set --
+	[ "$NC_HIDDEN" ] && set -- "$@" "-h"
+	[ "$NC_SILENT" == true ] && set -- "$@" "--silent"
+	[ "$NC_TRUST_CERT" == true ] && set -- "$@" "--trust"
+	[ "$NC_PATH" ] && set -- "$@" "--path" "$NC_PATH"
+	[ "$EXCLUDE" ] && set -- "$@" "--exclude" "$EXCLUDE"
+	[ "$UNSYNCEDFOLDERS" ] && set -- "$@" "--unsyncedfolders" "$UNSYNCEDFOLDERS"
+	set -- "$@" "--non-interactive" "-u" "$NC_USER" "-p" "$NC_PASS" "$NC_SOURCE_DIR" "$NC_URL"
+	nextcloudcmd "$@"
 
 	[ "$NC_SILENT" == true ] && echo "[ info run.sh ]: Sync done" | ts "${LOG_DATE_FORMAT}"
 	echo "[ info run.sh ]: chown -R $USER_UID:$USER_GID $NC_SOURCE_DIR" | ts "${LOG_DATE_FORMAT}"

@@ -9,6 +9,7 @@ services:
             NC_USER:
             NC_PASS:
             NC_SOURCE_DIR: '/media/nextcloud/'
+            NC_PATH: ''
             NC_SILENT: 'false'
             NC_INTERVAL: 300
             NC_EXIT: 'false'
