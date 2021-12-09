@@ -63,7 +63,7 @@ replace:
 ## ENV variables to customize your deploy
 
 ##### NC_URL
-URL to the Nextcloud instance. You can sync spepcific folders by providing the full path in the URL like `https://cloud.example.com/remote.php/webdav/<path/to/custom/dir>`. This will only sync the contents of `path/to/custom/dir`.
+URL to the Nextcloud instance. Specify only the base URL of your host. Example: `https://cloud.example.com`.
 
 ##### NC_USER
 The user name to log in
@@ -75,6 +75,10 @@ Default: password
 ##### NC_SOURCE_DIR
 The directory inside de docker container to be synced, usually you will have a local mount here or a named volume
 default: /media/nextcloud/
+
+##### NC_PATH
+You can sync specific folders by providing the full path like `/path/to/custom/dir`. This will only sync the contents of this folder inside `$NC_SOURCE_DIR`.
+default: "" i.e. root folder
 
 ##### NC_SILENT
 whether or not output activity to console

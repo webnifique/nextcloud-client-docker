@@ -16,6 +16,7 @@ ENV USER=$USER \
     NC_URL="" \
     NC_TRUST_CERT=false \
     NC_SOURCE_DIR="/media/nextcloud/" \
+    NC_PATH="" \
     NC_SILENT=false \
     NC_EXIT=false   \
     NC_HIDDEN=false
