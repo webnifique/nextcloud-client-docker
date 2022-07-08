@@ -22,11 +22,8 @@ ENV USER=$USER \
     NC_HIDDEN=false
 
 
-# create group and user
-RUN addgroup -g $USER_GID $USER && adduser -G $USER -D -u $USER_UID $USER
-
 # update repositories and install nextcloud-client
-RUN apk update && apk add nextcloud-client moreutils && rm -rf /etc/apk/cache
+RUN apk update && apk add nextcloud-client moreutils sudo && rm -rf /etc/apk/cache
 
 # add run script
 ADD run.sh /usr/bin/run.sh
