@@ -11,6 +11,9 @@ if [ -z $NC_USER ] || [ -z $NC_PASS ] || [ -z $NC_URL ]; then
   exit 1
 fi
 
+getent group $USER_GID > /dev/null || addgroup -g $USER_GID $USER
+getent passwd $USER_UID > /dev/null || adduser -u $USER_UID $USER -D -H -G $USER
+
 [ -d /settings ] || mkdir -p /settings
 chown -R $USER_UID:$USER_GID /settings
 
@@ -45,11 +48,9 @@ do
 	[ "$EXCLUDE" ] && set -- "$@" "--exclude" "$EXCLUDE"
 	[ "$UNSYNCEDFOLDERS" ] && set -- "$@" "--unsyncedfolders" "$UNSYNCEDFOLDERS"
 	set -- "$@" "--non-interactive" "-u" "$NC_USER" "-p" "$NC_PASS" "$NC_SOURCE_DIR" "$NC_URL"
-	nextcloudcmd "$@"
+	sudo -u \#$USER_UID -g \#$USER_GID nextcloudcmd "$@"
 
 	[ "$NC_SILENT" == true ] && echo "[ info run.sh ]: Sync done" | ts "${LOG_DATE_FORMAT}"
-	echo "[ info run.sh ]: chown -R $USER_UID:$USER_GID $NC_SOURCE_DIR" | ts "${LOG_DATE_FORMAT}"
-	chown -R $USER_UID:$USER_GID $NC_SOURCE_DIR
 
 	#check if exit!
 	if [ "$NC_EXIT" = true ] ; then
