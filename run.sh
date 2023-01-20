@@ -39,6 +39,8 @@ fi
 while true
 do
 	[ "$NC_SILENT" == true ] && echo "[ info run.sh ]: Start sync from $NC_URL to $NC_SOURCE_DIR" | ts "${LOG_DATE_FORMAT}"
+	echo "[ info run.sh ]: chown -R $USER_UID:$USER_GID $NC_SOURCE_DIR" | ts "${LOG_DATE_FORMAT}"
+	chown -R $USER_UID:$USER_GID $NC_SOURCE_DIR
 
 	set --
 	[ "$NC_HIDDEN" ] && set -- "$@" "-h"
